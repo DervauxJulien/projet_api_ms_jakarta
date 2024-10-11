@@ -1,0 +1,12 @@
+services: 
+ api-database:
+    build: ./mssql_database
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=azerty@123456
+      - TZ=UTC
+    volumes:
+      - database-data:/var/opt/mssql
+
+volumes:
+    database-data:
