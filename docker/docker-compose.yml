@@ -1,12 +1,39 @@
-services: 
- api-database:
-    build: ./mssql_database
-    environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=azerty@123456
-      - TZ=UTC
-    volumes:
-      - database-data:/var/opt/mssql
-
+name: msssql-docker
+services:
+    database-server:
+        build:
+            context: .
+            dockerfile: dockerfile
+        environment:
+            - ACCEPT_EULA=Y
+            - MSSQL_SA_PASSWORD=azerty@123456
+            - MSSQL_ENABLE_HADR=1
+            - MSSQL_TCP_PORT=1433
+            - MSSQL_AGENT_ENABLED=true
+            - MSSQL_DATA_DIR=/var/opt/mssql/data
+            - MSSQL_DUMP_DIR=/var/opt/mssql/dump
+            - MSSQL_LOG_DIR=/var/opt/mssql/log_data
+            - MSSQL_BACKUP_DIR=/var/opt/mssql/backup_data
+            - MSSQL_ERROR_LOG_FILE=/var/opt/mssql/log/errorlog
+        ports:
+            - 1433:1433
+        restart: unless-stopped
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        volumes:
+            - ./data:/var/opt/mssql/data
+            - ./log_data:/var/opt/mssql/log_data
+            - ./backup_data:/var/opt/mssql/backup_data
+            - ./dump:/var/opt/mssql/dump
+            - ./secrets:/var/opt/mssql/secrets
+            - ./logs:/var/opt/mssql/log
+    watchtower:
+        image: containrrr/watchtower
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
 volumes:
-    database-data:
+  data:
+  log_data:
+  backup_data:
+  dump:
+  secrets:
+  logs:

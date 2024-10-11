@@ -1,0 +1,6 @@
+docker/backup_data
+docker/data
+docker/dump
+docker/log_data
+docker/logs
+docker/secrets
