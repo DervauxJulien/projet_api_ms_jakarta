@@ -14,6 +14,8 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.List;
 
+
+
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -72,10 +74,31 @@ public class UserResource {
         return entity;
     }
 
+    @PATCH
+    @Transactional
+    @Path("update/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateUser(@PathParam("id") Long id, Users userUpdates) {
+        Users entity = Users.findById(id);
+        if (entity == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        if (userUpdates.getUsername() != null) {
+            entity.setUsername(userUpdates.getUsername());
+        }
+        if (userUpdates.getEmail() != null) {
+            entity.setEmail(userUpdates.getEmail());
+        }
+        entity.persist();
+        return Response.ok(entity).build();
+    }
+
+
+
     @DELETE
     @Transactional
     @Path("delete/{id}")
-    public Response deleteOne(@PathParam("id") Long id) {
+    public Response deleteOneUser(@PathParam("id") Long id) {
         Users entity = Users.findById(id);
         if (entity == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
