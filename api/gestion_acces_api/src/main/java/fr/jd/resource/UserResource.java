@@ -3,6 +3,7 @@ package fr.jd.resource;
 import fr.jd.entity.Adress;
 import fr.jd.entity.Users;
 import fr.jd.repository.UserRepository;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
