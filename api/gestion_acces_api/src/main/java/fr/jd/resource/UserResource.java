@@ -3,14 +3,12 @@ package fr.jd.resource;
 import fr.jd.entity.Adress;
 import fr.jd.entity.Users;
 import fr.jd.repository.UserRepository;
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.List;
-
 
 
 @Path("/users")
@@ -43,7 +41,6 @@ public class UserResource {
         if (entity == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-
         if (userUpdates.getUsername() != null) {
             entity.setUsername(userUpdates.getUsername());
         }
@@ -65,7 +62,6 @@ public class UserResource {
         if (userUpdates.getPin() != null) {
             entity.setPin(userUpdates.getPin());
         }
-
         if (userUpdates.getAdress() != null) {
             if (entity.getAdress() == null) {
                 entity.setAdress(userUpdates.getAdress());
@@ -98,7 +94,4 @@ public class UserResource {
         entity.delete();
         return Response.noContent().build();
     }
-
-
-
 }
