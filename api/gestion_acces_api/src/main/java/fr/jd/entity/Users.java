@@ -23,7 +23,7 @@ public class Users extends PanacheEntityBase {
     public boolean isLock;
     public Date last_connection;
     public Integer pin;
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @OneToOne
+    @JoinColumn(name = "id_adress")
     public Adress adress;
 }
