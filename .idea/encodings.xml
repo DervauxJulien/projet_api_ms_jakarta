@@ -5,5 +5,7 @@
     <file url="file://$PROJECT_DIR$/api/gestion-acces/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/api/gestion_acces_api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/api/gestion_acces_api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/api/gestion_service_mailing/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/api/gestion_service_mailing/src/main/resources" charset="UTF-8" />
   </component>
 </project>
