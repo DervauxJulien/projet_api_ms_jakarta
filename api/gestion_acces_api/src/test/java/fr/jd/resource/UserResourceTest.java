@@ -15,6 +15,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
+
 @QuarkusTest
 class UserResourceTest {
 
@@ -24,7 +25,6 @@ class UserResourceTest {
     @Mock
     UserRepository userRepository;
 
-    // Cette méthode s'assure que les mocks sont initialisés avant chaque test
     @BeforeEach
     void initMocks() {
         MockitoAnnotations.openMocks(this);
@@ -32,7 +32,7 @@ class UserResourceTest {
 
     @Test
     void testGetAllUsers() {
-        // Créer des utilisateurs fictifs
+
         Users user1 = new Users();
         user1.setUsername("User1");
         user1.setEmail("user1@example.com");
