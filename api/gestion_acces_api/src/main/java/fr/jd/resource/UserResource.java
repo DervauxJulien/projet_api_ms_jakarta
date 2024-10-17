@@ -2,7 +2,6 @@ package fr.jd.resource;
 
 import fr.jd.entity.Adress;
 import fr.jd.entity.Users;
-import fr.jd.repository.AdressRepository;
 import fr.jd.repository.UserRepository;
 import fr.jd.service.CreateAdressDTO;
 import fr.jd.service.CreateUserDTO;
