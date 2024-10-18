@@ -1,7 +1,6 @@
 package fr.jd.resources;
 
 import fr.jd.entity.Mail;
-import fr.jd.entity.Users;
 import io.quarkus.mailer.Mailer;
 import io.quarkus.qute.Template;
 import io.smallrye.mutiny.Uni;
@@ -10,7 +9,8 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.QueryParam;
-import java.util.Random;
+import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 
 @Path("/email")
 public class EmailResource {
@@ -21,50 +21,19 @@ public class EmailResource {
     @Inject
     Template hello;
 
+    Mail mail = new Mail();
+
     @GET
     @Path("/send-verification")
     @Transactional
-    public Uni<Mail> sendVerificationEmail(@QueryParam("to") String to) {
+    public Uni<Response> sendVerificationEmail(Mail mail) {
 
-        int pin = Integer.parseInt(generatePinCode());
-
-        Users user = findOrCreateUser(to);
-
-        storePinInDatabase(user, pin);
-
-       mailer.send(
+        return mailer.send(
                 io.quarkus.mailer.Mail.withHtml(
-                        to,
+                        mail.to,
                         "Votre code de vérification",
-                        hello.data("name", user.getUsername(), "pin", pin).render()
+                        hello.data("name", mail.to, "pinCode", @RequestBody pin).render()
                 )
         );
-        return null;
-    }
-
-    private String generatePinCode() {
-        Random random = new Random();
-        int pin = 100000 + random.nextInt(900000);  // Génère un nombre à 6 chiffres
-        return String.valueOf(pin);
-    }
-
-    private Users findOrCreateUser(String email) {
-        Users user = Users.find("email", email).firstResult();
-
-        if (user == null) {
-            user = new Users();
-            user.setEmail(email);
-            user.setUsername("Utilisateur");
-            user.persist();
-        }
-
-        return user;
-    }
-
-    private void storePinInDatabase(Users user, int pin) {
-        System.out.println("Sauvegarder le code PIN pour l'utilisateur " + user.getEmail() + " : " + pin);
-
-        user.setPin(pin);
-        user.persist();
     }
 }

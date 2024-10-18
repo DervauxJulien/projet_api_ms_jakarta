@@ -1,5 +1,5 @@
 Bonjour {name},
 
-Voici votre code de vérification : {pinCode}.
+Voici votre code de vérification : {pin}.
 
 Merci de l'utiliser pour valider votre accès.
