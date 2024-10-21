@@ -16,8 +16,6 @@ public class Mail extends PanacheEntityBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_mail")
     private Integer id;
-    @Column(name = "to")
-    public String to;
     @Column(name = "object")
     public String object;
     @Column(name = "sending_date")

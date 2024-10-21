@@ -1,4 +1,6 @@
-Bonjour {name},
+{object}, {sending_date}
+
+Bonjour {email},
 
 Voici votre code de vérification : {pin}.
 
