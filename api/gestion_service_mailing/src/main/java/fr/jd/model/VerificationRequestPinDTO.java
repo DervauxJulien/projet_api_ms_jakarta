@@ -13,4 +13,7 @@ public class VerificationRequestPinDTO {
     public String pin;
     public String object;
     public String sending_date;
+    public String content;
+    public String apiKey;
+
 }
